@@ -1,0 +1,9 @@
+h1 {
+  color: blue;
+  border: 1px black solid;
+}
+
+p {
+  color: green;
+  font-weight: bold;
+}

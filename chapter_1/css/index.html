@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Html CSS</title>
+    <!-- Stylesheet External CSS -->
+    <!-- <link rel="stylesheet" href="style.css" /> -->
+
+    <!-- Stylesheet Internal CSS -->
+    <style>
+      /* Selector element */
+      h1 {
+        color: green;
+        border: 1px black solid;
+
+        /* padding-top: 10px;
+        padding-bottom: 10px;
+        padding-right: 10px;
+        padding-left: 10px; */
+
+        /* Simplify padding style */
+        padding: 10px 10px 10px 10px;
+      }
+
+      p {
+        color: green;
+        font-weight: bold;
+      }
+
+      @media (min-width: 768px) {
+        h1 {
+          color: yellow;
+        }
+      }
+
+      /* Selector ID */
+      #paragraph-red {
+        color: red;
+      }
+
+      /* Selector Class */
+      .h1-purple {
+        color: purple;
+      }
+
+      .button {
+        color: white;
+        background-color: red;
+      }
+
+      /* Psuedo Class */
+      .button:hover {
+        color: black;
+        background-color: yellow;
+      }
+
+      .button:focus {
+        color: white;
+        background-color: green;
+      }
+
+      /* Pseudo Element */
+      .button::before {
+        content: 'halo';
+      }
+
+      .button::after {
+        content: 'bye';
+      }
+    </style>
+  </head>
+  <body>
+    <!-- <h1 style="color: red; font-weight: bold">Ini judul</h1> -->
+    <h1>Ini judul</h1>
+    <p>Ini deskripsi</p>
+    <div>
+      <p id="paragraph-red">children</p>
+    </div>
+    <h1 class="h1-purple">Ini judul lain</h1>
+    <button class="button">Button berubah warna</button>
+  </body>
+</html>
