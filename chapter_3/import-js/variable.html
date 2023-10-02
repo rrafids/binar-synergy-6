@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Variabel JS</title>
+  </head>
+  <body>
+    <script>
+      var name = 'Ahmad';
+
+      // if (name == 'Ahmad') {
+      //   var name = 'Brilly';
+      //   console.log('Nama di dalam if:', name);
+      // }
+
+      function changeName() {
+        var name = 'Brilly';
+
+        console.log('Nama di dalam if:', name);
+      }
+
+      changeName();
+
+      console.log('Nama di luar if:', name);
+
+      // Constant
+      const earthShape = 'bulat';
+      const paid = 'lunas';
+
+      // earthShape = 'jajar genjang';
+
+      console.log(earthShape);
+      console.log(typeof earthShape);
+
+      // Data type
+      // 1. Array & Object
+      const person = {
+        name: 'Brilly',
+        age: 54,
+        pets: [
+          {
+            name: 'riski',
+            accesories: [{ name: 'kalung' }, { name: 'sepatu' }],
+          },
+          { name: 'wahyu' },
+        ],
+      };
+
+      // Looping data pets one by one
+      console.log(
+        person.pets.forEach(function (value) {
+          console.log('Pets: ', value);
+        })
+      );
+      console.log(person.pets[0].accesories[0].name);
+    </script>
+  </body>
+</html>

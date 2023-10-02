@@ -1,0 +1,1 @@
+console.log("Halo dari eksternal JS!")
