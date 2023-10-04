@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // Destructure
+
+      // 1. Object
+      let person1 = {
+        name: 'Parhan',
+        age: 89,
+      };
+
+      let person2 = {
+        name: 'Sarah',
+        age: 102,
+      };
+
+      // Mau ambil attribute name dari object person
+      // Cara 1
+      let name = person1.name;
+
+      // Cara 2
+      let { name: name2 } = person2;
+
+      console.log('Nama:', name);
+      console.log('Nama 2:', name2);
+
+      // 2. Array
+      let fruits = ['mangga', 'pisang', 'parhan'];
+      let [firstFruit, , thirdFruit] = fruits;
+
+      console.log('First fruit:', firstFruit);
+      console.log('Third fruit:', thirdFruit);
+
+      console.log('Fruits 1 ke 2', fruits.slice(0, 2));
+      console.log('Fruits 1 ke terakhir', fruits.slice(0, fruits.length));
+    </script>
+  </body>
+</html>

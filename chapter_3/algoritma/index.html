@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // Algoritma
+      // 1. If else
+      // 2. Switch
+      // 3. For loop
+      // for (let i = 1; i <= 5; i++) {
+      //   console.log('Aku ada di lantai:', i);
+      // }
+      // 4. For loop with array
+      // let fruits = ['mangga', 'apel', 'pisang'];
+
+      // for (let i = 0; i < fruits.length; i++) {
+      //   console.log('Buah ke-', i);
+      //   console.log(fruits[i]);
+      // }
+      // 5. While loop
+      // ngapainn...
+      // i = 5;
+      // while (i <= 5) {
+      //   console.log('Aku ada di lantai:', i);
+
+      //   i++;
+      // }
+
+      // 6. Contoh cek bilangan ganjil/genap, dari 1 - 100, lalu diprint
+      // 1. Kita perlu bikin for loop, 1 - 100
+      const n = 100;
+      const result = [];
+
+      for (let i = 1; i <= n; i++) {
+        if (i % 2 === 0) {
+          // console.log(i, 'bilangan genap');
+          result.push('genap');
+        } else {
+          // console.log(i, 'bilangan ganjil');
+          result.push('ganjil');
+        }
+      }
+
+      console.log('Hasil array:', result);
+      // 2. Kita cek kalo bilangan % 2 == 0 -> print genap
+      // 3. kalo bilangan % 2 != 0 -> print ganjil
+      // 4. Kita diminta buat simpen hasilnya ke dalam array
+      // 5. Kita perlu masukkan hasil pengecekan ke dalam array yang kita define diawal
+      // 6. Print arraynya
+    </script>
+  </body>
+</html>
