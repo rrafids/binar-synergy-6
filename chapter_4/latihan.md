@@ -1,8 +1,9 @@
+# Topic 1 - Class
 1. Create an abstract class named UserRepository
 This class doesn't have any porperty, you doesn't need to define the constructor
 This class will have 2 function
 First is getAll()
-Second is add()
+Second is add(user), this function receive object of user that need to be added
 Please restrict all function to be called without being implemented first
 You can throw an error
 Eg: throw new Error('USER_REPOSITORY.METHOD_NOT_IMPLEMENTED');
