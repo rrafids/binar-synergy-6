@@ -30,3 +30,9 @@
    Please add corresponding data & try to get it all and print it
 
 <!-- Clue: you can use filter & map for manipulating users data -->
+
+# Topic 2 - DOM
+
+1. Please create 2 input
+2. Input 1 listener input text, diatasnya ada text yang diubah berdasar input
+3. Input 2 listener input color, change background color

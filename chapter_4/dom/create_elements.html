@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DOM Create Elements</title>
+  </head>
+  <body></body>
+  <script>
+    const titleElement = document.createElement('h1');
+    titleElement.innerText = 'Ini element dibuat melalui DOM.';
+    document.body.append(titleElement);
+
+    const descriptionElement = document.createElement('p');
+    descriptionElement.innerText = 'Ini desc element dibuat melalui DOM.';
+    document.body.append(descriptionElement);
+  </script>
+</html>

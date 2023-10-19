@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Belajar DOM</title>
+  </head>
+  <body>
+    <h1 id="title">Belajar DOM</h1>
+
+    <h1 name="title-name">Belajar DOM</h1>
+
+    <button id="button-click">Klik aku!</button>
+
+    <p class="description">Deskripsi Belajar DOM</p>
+    <p class="description">Deskripsi Belajar DOM</p>
+    <p class="description">Deskripsi Belajar DOM</p>
+
+    <script>
+      // Update title
+      let titleElement = document.getElementById('title');
+
+      titleElement.innerText = 'Content updated with DOM';
+
+      titleElement.style.backgroundColor = 'gray';
+
+      // Update title-name
+      let titleNameElements = document.getElementsByName('title-name');
+
+      titleNameElements[0].innerText = 'Content updated with DOM';
+      titleNameElements[0].style.backgroundColor = 'green';
+
+      // Looping approach
+      // const titleNameElementsArray = [...titleNameElements];
+
+      // titleNameElementsArray.map((element) => {
+      //   element.innerText = 'Content updated with DOM';
+      //   element.style.backgroundColor = 'green';
+      // });
+
+      // Update description
+      let descriptionElements = document.getElementsByClassName('description');
+
+      const descriptionElementsArray = [...descriptionElements];
+
+      descriptionElementsArray.map((element) => {
+        element.innerText = 'Content updated with DOM';
+        element.style.backgroundColor = 'gray';
+      });
+    </script>
+  </body>
+</html>

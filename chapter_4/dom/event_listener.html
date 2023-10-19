@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DOM Event Listener</title>
+  </head>
+  <body>
+    <h1 id="title"></h1>
+
+    <label>Warna background:</label>
+    <input id="color-picker" type="color" />
+
+    <br />
+
+    <!-- Ubah title -->
+    <label>Title changer:</label>
+    <input id="text-field" type="text" />
+  </body>
+  <script>
+    const titleElement = document.getElementById('title');
+
+    const inputColorPickerElement = document.getElementById('color-picker');
+
+    inputColorPickerElement.addEventListener('input', (event) => {
+      document.body.style.backgroundColor = event.target.value;
+    });
+
+    const textFieldElement = document.getElementById('text-field');
+
+    textFieldElement.addEventListener('input', (event) => {
+      titleElement.innerText = event.target.value;
+    });
+  </script>
+</html>
