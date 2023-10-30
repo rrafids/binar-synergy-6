@@ -27,6 +27,7 @@ class Person {
   }
 
   getByID(id: number): PersonObject {
+    console.log(this.people.find((person) => person.id === id))
     return this.people.filter((person) => person.id === id)[0];
   }
 
