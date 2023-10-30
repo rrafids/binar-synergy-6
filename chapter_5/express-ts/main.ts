@@ -45,6 +45,7 @@ app.get('/api/users', (req: Request, res: Response) => {
 //   "name": "arras",
 //   "profile_photo_url": "URL_FROM_CLOUDINARY" // This is the additional data
 // }
+// Please makesure you can get values from form data
 
 app.listen(PORT, () => {
   console.log(`Server is running on localhost:${PORT}`);
