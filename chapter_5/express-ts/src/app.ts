@@ -15,6 +15,7 @@ app.get('/api/users', usersHandler.getUsers);
 app.post('/api/users', usersHandler.createUser);
 
 // TODO: Create endpoint for get user by id
+// TODO: Create endpoint for delete user by id
 
 app.listen(PORT, () => {
   console.log(`Server is running on localhost:${PORT}`);
