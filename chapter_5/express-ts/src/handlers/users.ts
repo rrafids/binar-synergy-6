@@ -9,18 +9,22 @@ class UsersHandler {
   async getUsers(req: Request, res: Response) {
     const nameQuery: string = req.query.name as string;
 
+    let filteredUsers: User[] = listUser.map((user: User) => ({
+      id: user.id,
+      name: user.name || '',
+    }));
+
+    if (nameQuery) {
+      filteredUsers = filteredUsers.filter((user: User) =>
+        user.name?.toLowerCase().includes(nameQuery.toLowerCase())
+      );
+    }
+
     const response: DefaultResponse = {
       status: 'OK',
       message: 'Success retrieving data',
       data: {
-        users: listUser
-          .map((user: User) => ({
-            id: user.id,
-            name: user.name || '',
-          }))
-          .filter((user: User) =>
-            user.name?.toLowerCase().includes(nameQuery.toLowerCase())
-          ),
+        users: filteredUsers,
       },
     };
 
