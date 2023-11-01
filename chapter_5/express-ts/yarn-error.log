@@ -30,7 +30,7 @@ npm manifest:
   {
     "name": "express-ts",
     "version": "1.0.0",
-    "main": "main.ts",
+    "main": "app.ts",
     "license": "MIT",
     "dependencies": {
       "express": "^4.18.2"

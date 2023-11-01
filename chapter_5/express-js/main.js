@@ -60,7 +60,7 @@ app.delete("/api/users/:id", (req, res) => {
   const id = parseInt(req.params.id);
 
   const filteredUsers = listUser.filter(user => user.id !== id);
-  fs.writeFileSync("./data/users.json", JSON.stringify(filteredUsers))
+  fs.writeFileSync("./data/users.json", JSON.stringify(filteredUsers));
 
   const response = {
     status: "OK",
@@ -68,7 +68,7 @@ app.delete("/api/users/:id", (req, res) => {
     data: {
       deleted_user: listUser.find(user => user.id === id),
     },
-  }
+  };
 
   res.status(200).send(response);
 });
@@ -84,7 +84,7 @@ app.post("/api/users", (req, res) => {
       data: {
         created_user: null,
       },
-    }
+    };
 
     res.status(400).send(response);
   }
@@ -96,7 +96,7 @@ app.post("/api/users", (req, res) => {
 
   listUser.push(userToCreate);
 
-  fs.writeFileSync("./data/users.json", JSON.stringify(listUser))
+  fs.writeFileSync("./data/users.json", JSON.stringify(listUser));
 
   const response = {
     status: "CREATED",
@@ -121,10 +121,10 @@ app.patch("/api/users/:id", (req, res) => {
       data: {
         created_user: null,
       },
-    }
+    };
 
     res.status(400).send(response);
-  }
+  };
 
   let updatedUser;
 
@@ -134,8 +134,8 @@ app.patch("/api/users/:id", (req, res) => {
       updatedUser = user;
     }
 
-    return user
-  })
+    return user;
+  });
 
   fs.writeFileSync("./data/users.json", JSON.stringify(updatedUsers))
 

@@ -1,9 +1,9 @@
 {
   "name": "express-ts",
   "version": "1.0.0",
-  "main": "main.ts",
+  "main": "./src/app.ts",
   "scripts": {
-    "dev": "ts-node-dev main.ts"
+    "dev": "ts-node-dev ./src/app.ts"
   },
   "license": "MIT",
   "dependencies": {
