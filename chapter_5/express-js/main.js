@@ -2,6 +2,7 @@ const express = require('express');
 const fs = require('fs');
 
 const listUser = require('./data/users.json');
+const uploadFileUtil = require('./utils/uploadFile');
 
 const app = express();
 
@@ -73,8 +74,9 @@ app.delete("/api/users/:id", (req, res) => {
   res.status(200).send(response);
 });
 
-app.post("/api/users", (req, res) => {
+app.post("/api/users", uploadFileUtil.single("profile_picture_url"), (req, res) => {
   const payload = req.body;
+  console.log(payload)
 
   // Payload validation
   if (!payload.name) {

@@ -33,6 +33,7 @@ class UsersHandler {
 
   async createUser(req: Request, res: Response) {
     const payload: UserRequest = req.body;
+    payload.profile_picture_url = (req as any)['uploaded_profile_picture_url'];
 
     // Payload validation
     if (!payload.name) {
@@ -50,6 +51,7 @@ class UsersHandler {
     const userToCreate: User = {
       id: listUser[listUser.length - 1].id + 1,
       name: payload.name,
+      profilePictureUrl: payload.profile_picture_url,
     };
 
     const users: User[] = listUser;
