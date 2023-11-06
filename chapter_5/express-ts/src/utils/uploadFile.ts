@@ -11,8 +11,6 @@ const storage: StorageEngine = multer.diskStorage({
     const extension = filename.pop();
     const fileName = `${prefix}-${Date.now()}.${extension}`;
 
-    console.log(file.fieldname);
-
     // Do not call cb() before the logic for setting properties in the request object
     (req as any)[`uploaded_${file.fieldname}`] = fileName;
 

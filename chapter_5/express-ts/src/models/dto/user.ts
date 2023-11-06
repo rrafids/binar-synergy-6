@@ -1,6 +1,6 @@
 interface UserRequest {
   name: string;
-  role: string;
+  email: string;
   profile_picture_url: string;
 }
 

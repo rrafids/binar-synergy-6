@@ -1,30 +1,20 @@
 import { Request, Response } from 'express';
 import { DefaultResponse } from '../models/dto/default';
 import { User } from '../models/entity/user';
-import listUser from '../../data/users.json';
 import { UserRequest } from '../models/dto/user';
-import fs from 'fs';
+import UsersService from '../services/users';
 
 class UsersHandler {
   async getUsers(req: Request, res: Response) {
-    const nameQuery: string = req.query.name as string;
+    const queryName: string = req.query.name as string;
 
-    let filteredUsers: User[] = listUser.map((user: User) => ({
-      id: user.id,
-      name: user.name || '',
-    }));
-
-    if (nameQuery) {
-      filteredUsers = filteredUsers.filter((user: User) =>
-        user.name?.toLowerCase().includes(nameQuery.toLowerCase())
-      );
-    }
+    const userList: User[] = await UsersService.getUsers(queryName);
 
     const response: DefaultResponse = {
       status: 'OK',
       message: 'Success retrieving data',
       data: {
-        users: filteredUsers,
+        users: userList,
       },
     };
 
@@ -48,22 +38,13 @@ class UsersHandler {
       res.status(400).send(response);
     }
 
-    const userToCreate: User = {
-      id: listUser[listUser.length - 1].id + 1,
-      name: payload.name,
-      profilePictureUrl: payload.profile_picture_url,
-    };
-
-    const users: User[] = listUser;
-    users.push(userToCreate);
-
-    fs.writeFileSync('./data/users.json', JSON.stringify(users));
+    const createdUser: User = await UsersService.createUser(payload);
 
     const response: DefaultResponse = {
       status: 'CREATED',
       message: 'User succesfully created',
       data: {
-        created_user: userToCreate,
+        created_user: createdUser,
       },
     };
 
