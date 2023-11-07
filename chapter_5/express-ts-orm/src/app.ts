@@ -1,7 +1,6 @@
 import express, { Application } from 'express';
 import UsersHandler from './handlers/users';
 import uploadFileUtil from './utils/uploadFile';
-import CategoriesHandler from './handlers/categories';
 
 const app: Application = express();
 const PORT: number = 8081;
@@ -10,7 +9,6 @@ app.use(express.json());
 
 // Init handlers
 const usersHandler = new UsersHandler();
-const categoriesHandler = new CategoriesHandler();
 
 // Define routes
 // Users
@@ -20,10 +18,6 @@ app.post(
   uploadFileUtil.single('profile_picture_url'),
   usersHandler.createUser
 );
-
-// Categories
-app.post('/api/categories', categoriesHandler.createCategory);
-app.get('/api/categories', categoriesHandler.getCategories);
 
 // TODO:
 // -- Users
