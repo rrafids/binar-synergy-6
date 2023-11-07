@@ -16,3 +16,10 @@
 4. Get all tweet
 5. Create category tweet
 6. Get category tweet
+
+<!-- Flow bikin endpoint -->
+<!-- 4 layers -->
+<!-- 1. router --> done
+<!-- 2. handler --> done
+<!-- 3. service (usecase) --> done
+<!-- 4. repository (save/get ke db) --> done
