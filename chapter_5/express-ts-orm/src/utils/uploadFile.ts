@@ -1,6 +1,7 @@
 import multer, { StorageEngine } from 'multer';
 import { Request } from 'express';
 
+// Upload local
 const storage: StorageEngine = multer.diskStorage({
   destination: (req: Request, file, cb) => {
     cb(null, './storages'); // Set the destination path for file uploads

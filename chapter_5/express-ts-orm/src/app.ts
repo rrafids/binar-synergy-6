@@ -1,6 +1,6 @@
 import express, { Application } from 'express';
 import UsersHandler from './handlers/users';
-import uploadFileUtil from './utils/uploadFile';
+import uploadFileUtil from './utils/uploadFileMemory';
 
 const app: Application = express();
 const PORT: number = 8081;
@@ -15,7 +15,8 @@ const usersHandler = new UsersHandler();
 app.get('/api/users', usersHandler.getUsers);
 app.post(
   '/api/users',
-  uploadFileUtil.single('profile_picture_url'),
+  // uploadFileUtil.single('profile_picture_url'), // single file
+  uploadFileUtil.array('profile_pictures'), // multiple files
   usersHandler.createUser
 );
 

@@ -23,7 +23,14 @@ class UsersHandler {
 
   async createUser(req: Request, res: Response) {
     const payload: UserRequest = req.body;
-    payload.profile_picture_url = (req as any)['uploaded_profile_picture_url'];
+
+    // Multiple files
+    (req.files as Express.Multer.File[]).map((file) => {
+      payload.profile_picture_file = file;
+    });
+
+    // Single file
+    // payload.profile_picture_file = req.file;
 
     // Payload validation
     if (!payload.name) {

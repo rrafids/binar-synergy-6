@@ -3,11 +3,18 @@ import { User, UserEntity } from '../models/entity/user';
 
 class UsersRepository {
   static async getUsers(queryName: string): Promise<User[]> {
-    const listUser = await UserEntity.query().where(
-      raw('lower("name")'),
-      'like',
-      `%${queryName}%`
-    );
+    let listUser: User[] = [];
+
+    if (queryName) {
+      listUser = await UserEntity.query().where(
+        raw('lower("name")'),
+        'like',
+        `%${queryName}%`
+      );
+    } else {
+      listUser = await UserEntity.query();
+    }
+
     return listUser;
   }
 
