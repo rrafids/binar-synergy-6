@@ -1,6 +1,7 @@
 import express, { Application } from 'express';
 import UsersHandler from './handlers/users';
 import uploadFileUtil from './utils/uploadFileMemory';
+import AuthHandler from './handlers/auth';
 
 const app: Application = express();
 const PORT: number = 8081;
@@ -9,6 +10,7 @@ app.use(express.json());
 
 // Init handlers
 const usersHandler = new UsersHandler();
+const authHandler = new AuthHandler();
 
 // Define routes
 // Users
@@ -19,6 +21,10 @@ app.post(
   uploadFileUtil.array('profile_pictures'), // multiple files
   usersHandler.createUser
 );
+
+// Auth
+app.post('/api/auth/login', authHandler.login);
+app.post('/api/auth/register', authHandler.register);
 
 // TODO:
 // -- Users

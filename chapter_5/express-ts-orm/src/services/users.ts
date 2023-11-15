@@ -11,20 +11,44 @@ class UsersService {
   }
 
   static async createUser(user: UserRequest): Promise<User> {
-    const fileBase64 = user.profile_picture_file?.buffer.toString('base64');
-    const file = `data:${user.profile_picture_file?.mimetype};base64,${fileBase64}`;
+    try {
+      const fileBase64 = user.profile_picture_file?.buffer.toString('base64');
+      const file = `data:${user.profile_picture_file?.mimetype};base64,${fileBase64}`;
 
-    const uploadedFile = await cloudinary.uploader.upload(file);
+      // Async await
+      const uploadedFile = await cloudinary.uploader.upload(file); // async
 
-    const userToCreate: User = {
-      email: user.email,
-      name: user.name,
-      profile_picture_url: uploadedFile.url,
-    };
+      const userToCreate: User = {
+        email: user.email,
+        name: user.name,
+        profile_picture_url: uploadedFile.url,
+      };
 
-    const createdUser = await UsersRepository.createUser(userToCreate);
+      const createdUser = await UsersRepository.createUser(userToCreate);
 
-    return createdUser;
+      return createdUser;
+    } catch (error) {
+      throw error;
+    }
+
+    // Callback
+    // cloudinary.uploader.upload(file).then((uploadedFile) => {
+    //   const userToCreate: User = {
+    //     email: user.email,
+    //     name: user.name,
+    //     profile_picture_url: uploadedFile.url,
+    //   };
+
+    //   UsersRepository.createUser(userToCreate)
+    //     .then((createdUser) => {
+    //       // callback 3
+    //       // callback 4 didalem callback 5
+    //       return createdUser;
+    //     })
+    //     .catch((error) => {
+    //       return error
+    //     });
+    // });
   }
 }
 

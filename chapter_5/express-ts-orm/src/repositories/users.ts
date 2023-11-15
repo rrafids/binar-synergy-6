@@ -23,9 +23,22 @@ class UsersRepository {
       email: user.email,
       name: user.name,
       profile_picture_url: user.profile_picture_url,
+      password: user.password,
     });
 
     return createdUser;
+  }
+
+  static async getUserByEmail(email: string): Promise<User | null> {
+    const user = await UserEntity.query()
+      .where(raw('lower("email")'), '=', email)
+      .first();
+
+    if (user === undefined) {
+      return null;
+    }
+
+    return user;
   }
 }
 

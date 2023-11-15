@@ -6,6 +6,7 @@ export async function up(knex: Knex): Promise<void> {
     table.string('email', 30).notNullable();
     table.string('name', 30).notNullable();
     table.text('profile_picture_url');
+    table.text('password');
   });
 }
 
