@@ -8,42 +8,25 @@ class AuthHandler {
   async login(req: Request, res: Response) {
     const payload: LoginRequest = req.body;
 
-    // Payload validation
-    if (!payload.email) {
+    const loginResponse = await AuthService.login(payload);
+
+    if (isErrorType(loginResponse)) {
       const response: DefaultResponse = {
         status: 'BAD_REQUEST',
-        message: 'Email cannot be empty',
-        data: {
-          created_user: null,
-        },
+        message: loginResponse.message,
+        data: null,
       };
 
-      res.status(400).send(response);
-    }
-
-    if (!payload.password) {
+      res.status(loginResponse.httpCode).send(response);
+    } else {
       const response: DefaultResponse = {
-        status: 'BAD_REQUEST',
-        message: 'Password cannot be empty',
-        data: {
-          created_user: null,
-        },
+        status: 'OK',
+        message: 'User logged in succesfully',
+        data: loginResponse,
       };
 
-      res.status(400).send(response);
+      res.status(200).send(response);
     }
-
-    const accessToken: string = await AuthService.login(payload);
-
-    const response: DefaultResponse = {
-      status: 'OK',
-      message: 'User logged in succesfully',
-      data: {
-        access_token: accessToken,
-      },
-    };
-
-    res.status(200).send(response);
   }
 
   async register(req: Request, res: Response) {
@@ -55,7 +38,7 @@ class AuthHandler {
         status: 'BAD_REQUEST',
         message: 'Email cannot be empty',
         data: {
-          created_user: null,
+          registered_user: null,
         },
       };
 
@@ -67,7 +50,7 @@ class AuthHandler {
         status: 'BAD_REQUEST',
         message: 'Name cannot be empty',
         data: {
-          created_user: null,
+          registered_user: null,
         },
       };
 
@@ -107,6 +90,18 @@ class AuthHandler {
 
       res.status(201).send(response);
     }
+  }
+
+  async getLoggedInUser(req: Request, res: Response) {
+    const response: DefaultResponse = {
+      status: 'OK',
+      message: 'User logged in succesfully',
+      data: {
+        user: req.user,
+      },
+    };
+
+    res.status(200).send(response);
   }
 }
 

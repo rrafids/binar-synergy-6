@@ -2,11 +2,21 @@ import express, { Application } from 'express';
 import UsersHandler from './handlers/users';
 import uploadFileUtil from './utils/uploadFileMemory';
 import AuthHandler from './handlers/auth';
+import AuthMiddleware from './middlewares/auth';
+import { Context } from 'vm';
 
 const app: Application = express();
-const PORT: number = 8081;
+const PORT: number = 8082;
 
 app.use(express.json());
+
+declare global {
+  namespace Express {
+    interface Request {
+      context: Context;
+    }
+  }
+}
 
 // Init handlers
 const usersHandler = new UsersHandler();
@@ -14,7 +24,7 @@ const authHandler = new AuthHandler();
 
 // Define routes
 // Users
-app.get('/api/users', usersHandler.getUsers);
+app.get('/api/users', AuthMiddleware.authenticate, usersHandler.getUsers);
 app.post(
   '/api/users',
   // uploadFileUtil.single('profile_picture_url'), // single file
@@ -23,8 +33,13 @@ app.post(
 );
 
 // Auth
-app.post('/api/auth/login', authHandler.login);
 app.post('/api/auth/register', authHandler.register);
+app.post('/api/auth/login', authHandler.login);
+app.get(
+  '/api/auth/me',
+  AuthMiddleware.authenticate,
+  authHandler.getLoggedInUser
+);
 
 // TODO:
 // -- Users

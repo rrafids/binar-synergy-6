@@ -1,23 +1,50 @@
 import { NextFunction, Request, Response } from 'express';
-import { DefaultResponse } from '../models/dto/default';
-import { UserRequest } from '../models/dto/user';
+import jwt from 'jsonwebtoken';
+import UsersRepository from '../repositories/users';
+import { TokenPayload } from '../models/entity/auth';
 
 class AuthMiddleware {
-  // isAdmin(req: Request, res: Response, next: NextFunction) {
-  //   const payload: UserRequest = req.body;
+  static async authenticate(req: Request, res: Response, next: NextFunction) {
+    // Decode token & validate token
+    // Get token from authorization header
+    const authHeader = req.get('Authorization');
 
-  //   if (payload.role === 'admin') {
-  //     next();
-  //   }
+    let accessToken: string;
+    if (authHeader && authHeader.startsWith('Bearer'))
+      accessToken = authHeader.split(' ')[1];
+    else
+      return res.status(401).send({
+        status: 'UNATHORIZED',
+        message: 'You need to login to access this resource',
+        data: null,
+      });
 
-  //   const response: DefaultResponse = {
-  //     status: 'UNAUTHORIZED',
-  //     message: 'Role should be admin',
-  //     data: null,
-  //   };
+    // Validate jwt token
+    try {
+      const jwtSecret = 'SECRET';
 
-  //   res.status(401).send(response);
-  // }
+      const payload = jwt.verify(accessToken, jwtSecret) as TokenPayload;
+
+      const user = await UsersRepository.getUserByEmail(payload.email);
+
+      if (!user)
+        return res.status(401).send({
+          status: 'UNATHORIZED',
+          message: "User doesn't exist",
+          data: null,
+        });
+
+      req.user = user;
+
+      next();
+    } catch (error) {
+      return res.status(401).send({
+        status: 'UNAUTHORIZED',
+        message: 'Session expired, please login again',
+        data: null,
+      });
+    }
+  }
 }
 
 export default AuthMiddleware;
