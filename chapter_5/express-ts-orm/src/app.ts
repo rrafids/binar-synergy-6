@@ -10,14 +10,6 @@ const PORT: number = 8082;
 
 app.use(express.json());
 
-declare global {
-  namespace Express {
-    interface Request {
-      context: Context;
-    }
-  }
-}
-
 // Init handlers
 const usersHandler = new UsersHandler();
 const authHandler = new AuthHandler();
