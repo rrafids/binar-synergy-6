@@ -6,9 +6,10 @@ import AuthMiddleware from './middlewares/auth';
 import swaggerUi from 'swagger-ui-express';
 import swaggerJsdoc from 'swagger-jsdoc';
 import { swaggerConfig } from './utils/swaggerOption';
+import dotenv from 'dotenv';
+dotenv.config();
 
 const app: Application = express();
-const PORT: number = 8082;
 
 app.use(express.json());
 
@@ -66,6 +67,6 @@ app.get(
 //   "categories" -> ['category_name']
 // }
 
-app.listen(PORT, () => {
-  console.log(`Server is running on localhost:${PORT}`);
+app.listen(process.env.APP_PORT, () => {
+  console.log(`Server is running on http://localhost:${process.env.APP_PORT}`);
 });

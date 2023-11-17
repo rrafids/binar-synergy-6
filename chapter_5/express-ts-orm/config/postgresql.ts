@@ -1,11 +1,13 @@
 import knex from 'knex';
+import dotenv from 'dotenv';
+dotenv.config();
 
 const knexInstance = knex({
-  client: 'postgresql',
+  client: process.env.DB_CLIENT,
   connection: {
-    database: 'twitter_orm',
-    user: '',
-    password: '',
+    database: process.env.DB_NAME,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
   },
 });
 
