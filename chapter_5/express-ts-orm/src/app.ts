@@ -3,7 +3,9 @@ import UsersHandler from './handlers/users';
 import uploadFileUtil from './utils/uploadFileMemory';
 import AuthHandler from './handlers/auth';
 import AuthMiddleware from './middlewares/auth';
-import { Context } from 'vm';
+import swaggerUi from 'swagger-ui-express';
+import swaggerJsdoc from 'swagger-jsdoc';
+import { swaggerConfig } from './utils/swaggerOption';
 
 const app: Application = express();
 const PORT: number = 8082;
@@ -15,6 +17,11 @@ const usersHandler = new UsersHandler();
 const authHandler = new AuthHandler();
 
 // Define routes
+
+// Swagger
+const swaggerSpec = swaggerJsdoc(swaggerConfig);
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+
 // Users
 app.get('/api/users', AuthMiddleware.authenticate, usersHandler.getUsers);
 app.post(

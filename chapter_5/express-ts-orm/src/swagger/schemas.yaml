@@ -1,0 +1,66 @@
+components:
+  schemas:
+    Default:
+      type: object
+      properties:
+        status:
+          type: string
+        message:
+          type: string
+        data:
+          type: object
+    AuthLoginRequest:
+      type: object
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+    AuthLoginResponse:
+      type: object
+      properties:
+        access_token:
+          type: string
+    AuthRegisterRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+        profile_picture_url:
+          type: string
+    AuthRegisterResponse:
+      type: object
+      properties:
+        registered_user:
+          type: object
+          properties:
+            id:
+              type: integer
+            email:
+              type: string
+            name:
+              type: string
+            password:
+              type: string
+            profile_picture_url:
+              type: string
+    UserResponse:
+      type: object
+      properties:
+        user:
+          type: object
+          properties:
+            id:
+              type: integer
+            email:
+              type: string
+            name:
+              type: string
+            password:
+              type: string
+            profile_picture_url:
+              type: string

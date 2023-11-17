@@ -24,7 +24,9 @@
     "multer": "^1.4.5-lts.1",
     "objection": "^3.1.2",
     "pg": "^8.11.3",
-    "redis": "^4.6.10"
+    "redis": "^4.6.10",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.0"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.2",
@@ -33,6 +35,8 @@
     "@types/jsonwebtoken": "^9.0.5",
     "@types/multer": "^1.4.9",
     "@types/pg": "^8.10.8",
+    "@types/swagger-jsdoc": "^6.0.3",
+    "@types/swagger-ui-express": "^4.1.6",
     "ts-node-dev": "^2.0.0",
     "typescript": "^5.2.2"
   }

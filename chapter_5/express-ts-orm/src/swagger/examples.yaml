@@ -1,0 +1,12 @@
+components:
+  examples:
+    Transaction:
+      status: success
+      data:
+        - id: 1
+          userId: 1
+          description: example description
+          type: DEBIT
+          createdAt: 2020-01-20T09:00:33.029Z
+          user:
+            name: test client
