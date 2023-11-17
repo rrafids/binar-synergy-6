@@ -17,14 +17,18 @@ app.use(express.json());
 const usersHandler = new UsersHandler();
 const authHandler = new AuthHandler();
 
-// Define routes
-
 // Swagger
 const swaggerSpec = swaggerJsdoc(swaggerConfig);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
+// Define routes
 // Users
-app.get('/api/users', AuthMiddleware.authenticate, usersHandler.getUsers);
+app.get(
+  '/api/users',
+  AuthMiddleware.authenticate,
+  // TODO: add role checking middleware
+  usersHandler.getUsers
+);
 app.post(
   '/api/users',
   // uploadFileUtil.single('profile_picture_url'), // single file
@@ -66,6 +70,13 @@ app.get(
 //    }
 //   "categories" -> ['category_name']
 // }
+
+// TODO: 17 November 2023
+// 1. Create swagger docs for api get list users & create user
+// 2. Please add 'role' field for each registration
+// User data:
+// id, role ('admin' | 'user'), name, email, password, profile_picture_url
+// 3. Please add middleware for endpoint get list user for checking user role (please makesure he is an 'admin')
 
 app.listen(process.env.APP_PORT, () => {
   console.log(`Server is running on http://localhost:${process.env.APP_PORT}`);
