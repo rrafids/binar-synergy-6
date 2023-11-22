@@ -7,6 +7,7 @@ import swaggerUi from 'swagger-ui-express';
 import swaggerJsdoc from 'swagger-jsdoc';
 import { swaggerConfig } from './utils/swaggerOption';
 import dotenv from 'dotenv';
+import TweetsHandler from './handlers/tweets';
 dotenv.config();
 
 const app: Application = express();
@@ -16,6 +17,7 @@ app.use(express.json());
 // Init handlers
 const usersHandler = new UsersHandler();
 const authHandler = new AuthHandler();
+const tweetsHandler = new TweetsHandler();
 
 // Swagger
 const swaggerSpec = swaggerJsdoc(swaggerConfig);
@@ -44,6 +46,10 @@ app.get(
   AuthMiddleware.authenticate,
   authHandler.getLoggedInUser
 );
+
+// Tweets
+app.get('/api/tweets', tweetsHandler.getTweets);
+app.post('/api/tweets', AuthMiddleware.authenticate, tweetsHandler.createTweet);
 
 // TODO:
 // -- Users
