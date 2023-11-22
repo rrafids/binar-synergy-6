@@ -49,6 +49,12 @@ class TweetsHandler {
 
     res.status(201).send(response);
   }
+
+  // func deleteTweet || updateTweet
+  // 1. ambil req.user.id dari middleware
+  // 2. sebelum delete, kita get tweet by id (kirim di path url parameter) -> check tweet.user_id === req.user.id
+  // 3. kalo sama -> delete
+  // 4. kalo ga sama -> return 401
 }
 
 export default TweetsHandler;
