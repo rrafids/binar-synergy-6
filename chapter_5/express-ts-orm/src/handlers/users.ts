@@ -25,12 +25,12 @@ class UsersHandler {
     const payload: UserRequest = req.body;
 
     // Multiple files
-    (req.files as Express.Multer.File[]).map((file) => {
-      payload.profile_picture_file = file;
-    });
+    // (req.files as Express.Multer.File[]).map((file) => {
+    //   payload.profile_picture_file = file;
+    // });
 
     // Single file
-    // payload.profile_picture_file = req.file;
+    payload.profile_picture_file = req.file;
 
     // Payload validation
     if (!payload.name) {

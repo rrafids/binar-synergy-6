@@ -35,8 +35,8 @@ app.get(
 );
 app.post(
   '/api/users',
-  // uploadFileUtil.single('profile_picture_url'), // single file
-  uploadFileUtil.array('profile_pictures'), // multiple files
+  uploadFileUtil.single('profile_picture'), // single file
+  // uploadFileUtil.array('profile_pictures'), // multiple files
   usersHandler.createUser
 );
 

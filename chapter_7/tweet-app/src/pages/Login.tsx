@@ -1,10 +1,12 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
+const tweets_api_base_url = 'http://localhost:8082';
 
 export default function Login() {
+  const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
-  const tweets_api_base_url = 'http://localhost:8082';
 
   return (
     <div>
@@ -15,8 +17,6 @@ export default function Login() {
           value={email}
           onChange={({ target }) => {
             setEmail(target.value);
-
-            console.log('email value', email);
           }}
           placeholder='Masukkan email'
         />
@@ -24,8 +24,6 @@ export default function Login() {
           value={password}
           onChange={({ target }) => {
             setPassword(target.value);
-
-            console.log('password value', password);
           }}
           type='password'
           placeholder='Masukkan password'
@@ -59,6 +57,9 @@ export default function Login() {
               'access_token',
               responseJson.data.access_token
             );
+
+            // If login succeed, redirect ke home
+            navigate('/');
           }}
         >
           Login

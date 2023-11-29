@@ -1,4 +1,6 @@
+import { PlusCircleIcon } from '@heroicons/react/20/solid';
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 interface UserEntity {
   id: number;
@@ -17,6 +19,7 @@ const tweets_api_base_url = 'http://localhost:8082';
 
 export default function Home() {
   const [tweets, setTweets] = useState([]);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
     const fetchTweets = async () => {
@@ -26,33 +29,67 @@ export default function Home() {
       setTweets(responseJSON.data.tweets);
     };
 
+    const checkIsLoggedIn = () => {
+      const accessToken = localStorage.getItem('access_token');
+
+      if (accessToken) setIsLoggedIn(true);
+      else setIsLoggedIn(false);
+    };
+
     fetchTweets();
+    checkIsLoggedIn();
   }, []);
 
+  const logoutHandler = () => {
+    localStorage.removeItem('access_token');
+
+    setIsLoggedIn(false);
+  };
+
   return (
-    <div>
-      <h1>Home</h1>
-      <button
-        onClick={() => {
-          localStorage.removeItem('access_token');
-        }}
-      >
-        Logout
-      </button>
+    <div className='flex w-full bg-gray-300 place-content-center min-h-screen'>
+      <div className='w-[600px] bg-gray-200 p-5'>
+        <div className='flex justify-between'>
+          <h1 className='font-bold text-3xl'>Home</h1>
+          {isLoggedIn ? (
+            <button
+              className='py-2 px-3 bg-black text-white rounded-lg'
+              onClick={logoutHandler}
+            >
+              Logout
+            </button>
+          ) : (
+            <Link to='/login'>
+              <button className='py-2 px-3 bg-black text-white rounded-lg'>
+                Login
+              </button>
+            </Link>
+          )}
+        </div>
 
-      <div>
-        <h2>List Tweet</h2>
+        <div className='mt-[30px]'>
+          <div className='flex items-center justify-between'>
+            <h1 className='font-bold text-xl'>List Tweet</h1>
+            <Link to='/create-tweet'>
+              <button className='py-2 px-3  text-white rounded-lg'>
+                <PlusCircleIcon className='w-8 h-8 text-black' />
+              </button>
+            </Link>
+          </div>
 
-        <div>
-          {!tweets.length && <div>Data kosong</div>}
+          <div className='mt-[10px]'>
+            {!tweets.length && <div>Data kosong</div>}
 
-          {tweets &&
-            tweets.map((tweet: TweetEntity) => (
-              <div key={tweet.id}>
-                <h3>{tweet.content}</h3>
-                <p>Dibuat oleh {tweet.user.name}</p>
-              </div>
-            ))}
+            {tweets &&
+              tweets.map((tweet: TweetEntity) => (
+                <div key={tweet.id} className='mt-3'>
+                  <h3>{tweet.content}</h3>
+                  <p>
+                    Dibuat oleh <strong>{tweet.user.name}</strong>
+                  </p>
+                </div>
+              ))}
+          </div>
         </div>
       </div>
     </div>
