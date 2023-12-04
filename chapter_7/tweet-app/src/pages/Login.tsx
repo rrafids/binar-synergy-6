@@ -17,6 +17,7 @@ export default function Login() {
     console.log('response google success:', response);
 
     // TODO: integrate with backend to save user google credential
+    // If user is valid, save the token and redirect to home page
   };
 
   return (

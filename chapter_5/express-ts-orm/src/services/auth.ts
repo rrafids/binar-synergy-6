@@ -1,8 +1,4 @@
 import { LoginRequest, RegisterRequest } from '../models/dto/auth';
-import {
-  GetGoogleUserInfoResponse,
-  IGetGoogleUserInfoResponse,
-} from '../models/dto/google';
 import { Auth } from '../models/entity/auth';
 import { ErrorResponse } from '../models/entity/default';
 import { User } from '../models/entity/user';

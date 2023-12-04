@@ -8,16 +8,4 @@ interface GoogleUserInfo {
   name: string;
 }
 
-class GetGoogleUserInfoResponse implements IGetGoogleUserInfoResponse {
-  private payload$: GoogleUserInfo;
-
-  constructor(payload: GoogleUserInfo) {
-    this.payload$ = payload;
-  }
-
-  public get payload$() {
-    return this.payload$;
-  }
-}
-
-export { IGetGoogleUserInfoResponse, GetGoogleUserInfoResponse };
+export { IGetGoogleUserInfoResponse };
