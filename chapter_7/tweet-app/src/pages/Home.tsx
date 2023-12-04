@@ -70,11 +70,13 @@ export default function Home() {
         <div className='mt-[30px]'>
           <div className='flex items-center justify-between'>
             <h1 className='font-bold text-xl'>List Tweet</h1>
-            <Link to='/create-tweet'>
-              <button className='py-2 px-3  text-white rounded-lg'>
-                <PlusCircleIcon className='w-8 h-8 text-black' />
-              </button>
-            </Link>
+            {isLoggedIn && (
+              <Link to='/create-tweet'>
+                <button className='py-2 px-3  text-white rounded-lg'>
+                  <PlusCircleIcon className='w-8 h-8 text-black' />
+                </button>
+              </Link>
+            )}
           </div>
 
           <div className='mt-[10px]'>

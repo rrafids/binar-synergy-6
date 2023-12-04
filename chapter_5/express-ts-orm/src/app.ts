@@ -49,6 +49,9 @@ app.get(
   authHandler.getLoggedInUser
 );
 
+// Google Auth
+app.get('/api/auth/login/google', authHandler.loginGoogle);
+
 // Tweets
 app.get('/api/tweets', tweetsHandler.getTweets);
 app.post('/api/tweets', AuthMiddleware.authenticate, tweetsHandler.createTweet);

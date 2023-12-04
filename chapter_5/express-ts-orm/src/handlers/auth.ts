@@ -103,6 +103,32 @@ class AuthHandler {
 
     res.status(200).send(response);
   }
+
+  async loginGoogle(req: Request, res: Response) {
+    const googleAccessToken = req.query.access_token as string;
+
+    const loginGoogleResponse = await AuthService.loginGoogle(
+      googleAccessToken
+    );
+
+    if (isErrorType(loginGoogleResponse)) {
+      const response: DefaultResponse = {
+        status: 'BAD_REQUEST',
+        message: loginGoogleResponse.message,
+        data: null,
+      };
+
+      res.status(loginGoogleResponse.httpCode).send(response);
+    } else {
+      const response: DefaultResponse = {
+        status: 'OK',
+        message: 'User logged in succesfully',
+        data: loginGoogleResponse,
+      };
+
+      res.status(200).send(response);
+    }
+  }
 }
 
 export default AuthHandler;

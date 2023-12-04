@@ -1,10 +1,15 @@
 import { LoginRequest, RegisterRequest } from '../models/dto/auth';
+import {
+  GetGoogleUserInfoResponse,
+  IGetGoogleUserInfoResponse,
+} from '../models/dto/google';
 import { Auth } from '../models/entity/auth';
 import { ErrorResponse } from '../models/entity/default';
 import { User } from '../models/entity/user';
 import UsersRepository from '../repositories/users';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
+import { OAuth2Client } from 'google-auth-library';
 
 const SALT_ROUND = 10;
 
@@ -87,6 +92,61 @@ class AuthService {
       const createdUser = await UsersRepository.createUser(userToCreate);
 
       return createdUser;
+    } catch (error: any) {
+      // If something is wrong, return the error
+      const errorResponse: ErrorResponse = {
+        httpCode: 400,
+        message: error.message,
+      };
+
+      return errorResponse;
+    }
+  }
+
+  static async loginGoogle(
+    googleAccessToken: string
+  ): Promise<Auth | ErrorResponse> {
+    try {
+      // Get google user credential
+      const client = new OAuth2Client(
+        '52535015285-0i182g0q4ccnv9q3i4dgnh7hiah779u3.apps.googleusercontent.com'
+      );
+
+      const userInfo: any = await client.verifyIdToken({
+        idToken: googleAccessToken,
+        audience:
+          '52535015285-0i182g0q4ccnv9q3i4dgnh7hiah779u3.apps.googleusercontent.com',
+      });
+
+      const { email, name, picture } = userInfo.payload;
+
+      // Check if email is exist
+      const user = await UsersRepository.getUserByEmail(email);
+
+      if (!user) {
+        // TODO: Create new user based on google login response
+        throw new Error("temporary error: user doesn't exist");
+      }
+
+      // Generate token JWT
+      const jwtSecret = 'SECRET';
+      const jwtExpireTime = '24h';
+
+      const accessToken = jwt.sign(
+        {
+          email: user.email,
+        },
+        jwtSecret,
+        {
+          expiresIn: jwtExpireTime,
+        }
+      );
+
+      const token: Auth = {
+        access_token: accessToken,
+      };
+
+      return token;
     } catch (error: any) {
       // If something is wrong, return the error
       const errorResponse: ErrorResponse = {
