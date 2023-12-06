@@ -1,6 +1,9 @@
 import { PlusCircleIcon } from '@heroicons/react/20/solid';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import Header from '../components/Header';
+import { useDispatch } from 'react-redux';
+import { saveToken } from '../redux/slices/token';
 
 interface UserEntity {
   id: number;
@@ -18,8 +21,12 @@ interface TweetEntity {
 const tweets_api_base_url = 'http://localhost:8082';
 
 export default function Home() {
-  const [tweets, setTweets] = useState([]);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [tweets, setTweets] = useState<TweetEntity[]>([]);
+
+  // Use if you want to use passing state by props
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const fetchTweets = async () => {
@@ -32,24 +39,25 @@ export default function Home() {
     const checkIsLoggedIn = () => {
       const accessToken = localStorage.getItem('access_token');
 
-      if (accessToken) setIsLoggedIn(true);
-      else setIsLoggedIn(false);
+      // Use if you want to use passing state by props
+      if (accessToken) {
+        setIsLoggedIn(true);
+
+        // TODO:
+        // Save token to redux store
+        dispatch(saveToken(accessToken));
+      } else setIsLoggedIn(false);
     };
 
     fetchTweets();
     checkIsLoggedIn();
   }, []);
 
-  const logoutHandler = () => {
-    localStorage.removeItem('access_token');
-
-    setIsLoggedIn(false);
-  };
-
   return (
     <div className='flex w-full bg-gray-300 place-content-center min-h-screen'>
       <div className='w-[600px] bg-gray-200 p-5'>
-        <div className='flex justify-between'>
+        {/* Sample for passing state by props */}
+        {/* <div className='flex justify-between'>
           <h1 className='font-bold text-3xl'>Home</h1>
           {isLoggedIn ? (
             <button
@@ -65,7 +73,9 @@ export default function Home() {
               </button>
             </Link>
           )}
-        </div>
+        </div> */}
+
+        <Header />
 
         <div className='mt-[30px]'>
           <div className='flex items-center justify-between'>
