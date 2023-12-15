@@ -54,11 +54,11 @@ class AuthService {
       };
 
       return token;
-    } catch (error: any) {
+    } catch (error: unknown) {
       // If something is wrong, return the error
       const errorResponse: ErrorResponse = {
         httpCode: 400,
-        message: error.message,
+        message: (error as Error).message,
       };
 
       return errorResponse;
@@ -88,11 +88,11 @@ class AuthService {
       const createdUser = await UsersRepository.createUser(userToCreate);
 
       return createdUser;
-    } catch (error: any) {
+    } catch (error: unknown) {
       // If something is wrong, return the error
       const errorResponse: ErrorResponse = {
         httpCode: 400,
-        message: error.message,
+        message: (error as Error).message,
       };
 
       return errorResponse;
@@ -114,7 +114,8 @@ class AuthService {
           '52535015285-0i182g0q4ccnv9q3i4dgnh7hiah779u3.apps.googleusercontent.com',
       });
 
-      const { email, name, picture } = userInfo.payload;
+      // contains: email, name, picture
+      const { email } = userInfo.payload;
 
       // Check if email is exist
       const user = await UsersRepository.getUserByEmail(email);
@@ -143,11 +144,11 @@ class AuthService {
       };
 
       return token;
-    } catch (error: any) {
+    } catch (error: unknown) {
       // If something is wrong, return the error
       const errorResponse: ErrorResponse = {
         httpCode: 400,
-        message: error.message,
+        message: (error as Error).message,
       };
 
       return errorResponse;

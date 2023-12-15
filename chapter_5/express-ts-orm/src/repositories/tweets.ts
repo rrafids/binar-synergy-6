@@ -23,6 +23,10 @@ class TweetsRepository {
 
     return tweet || null;
   }
+
+  async deleteTweetByID(id: number) {
+    await TweetEntity.query().deleteById(id).withGraphFetched('user');
+  }
 }
 
 export { TweetsRepository };

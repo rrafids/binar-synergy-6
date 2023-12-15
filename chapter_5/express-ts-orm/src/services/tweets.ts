@@ -20,7 +20,7 @@ class TweetsService {
           id: tweet.user?.id as number,
           name: tweet.user?.name as string,
           email: tweet.user?.email as string,
-          profile_picture_file: tweet.user?.profile_picture_url as string,
+          profile_picture_url: tweet.user?.profile_picture_url as string,
         },
       };
 
@@ -40,7 +40,7 @@ class TweetsService {
         id: 0,
         name: '',
         email: '',
-        profile_picture_file: '',
+        profile_picture_url: '',
       },
     };
 
@@ -52,7 +52,7 @@ class TweetsService {
           id: tweet.user?.id as number,
           name: tweet.user?.name as string,
           email: tweet.user?.email as string,
-          profile_picture_file: tweet.user?.profile_picture_url as string,
+          profile_picture_url: tweet.user?.profile_picture_url as string,
         },
       };
     }

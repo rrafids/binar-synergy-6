@@ -6,6 +6,12 @@ describe('getTweetByID', () => {
     const expectedTweetResponse = {
       id: 1,
       content: 'tweet content',
+      user: {
+        email: 'test@email.com',
+        id: 1,
+        name: 'test name',
+        profile_picture_url: 'test_image.png',
+      },
     };
 
     /** creating dependency of use case */

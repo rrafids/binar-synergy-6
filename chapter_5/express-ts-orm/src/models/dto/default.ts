@@ -1,7 +1,7 @@
 interface DefaultResponse {
   status: string;
   message: string;
-  data: any;
+  data: unknown;
 }
 
 export { DefaultResponse };
