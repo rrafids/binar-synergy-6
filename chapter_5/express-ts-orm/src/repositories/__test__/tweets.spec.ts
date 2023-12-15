@@ -1,8 +1,8 @@
 import { Tweet } from '../../models/entity/tweet';
-import { TweetsRepository } from '../tweets';
+import TweetsRepository from '../tweets';
 
-describe('getTweets', () => {
-  it('should return a list of Tweets', async () => {
+describe('getTweetByID', () => {
+  it('should return a tweet data', async () => {
     const tweetsRepository = new TweetsRepository();
 
     const tweetToCreate: Tweet = {
@@ -17,7 +17,10 @@ describe('getTweets', () => {
 
     await tweetsRepository.deleteTweetByID(createdTweet.id as number);
 
-    expect(getTweet?.id).toEqual(tweetToCreate.id);
+    // Assertion
+    expect(getTweet?.id).toEqual(createdTweet.id);
     expect(getTweet?.content).toEqual(tweetToCreate.content);
   });
 });
+
+// TODO: Create unit test for createTweet repository

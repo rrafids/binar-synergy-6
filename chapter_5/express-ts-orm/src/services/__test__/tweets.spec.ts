@@ -1,4 +1,4 @@
-import { TweetsRepository } from '../../repositories/tweets';
+import TweetsRepository from '../../repositories/tweets';
 import TweetsService from '../tweets';
 
 describe('getTweetByID', () => {
@@ -29,3 +29,5 @@ describe('getTweetByID', () => {
     expect(tweet).toEqual(expectedTweetResponse);
   });
 });
+
+// TODO: Create unit test for createTweet usecase

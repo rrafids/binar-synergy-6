@@ -40,6 +40,10 @@ class UsersRepository {
 
     return user;
   }
+
+  static async deleteUserByID(id: number) {
+    await UserEntity.query().deleteById(id);
+  }
 }
 
 export default UsersRepository;

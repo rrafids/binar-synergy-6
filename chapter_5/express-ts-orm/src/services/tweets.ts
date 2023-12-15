@@ -1,6 +1,6 @@
 import { TweetRequest, TweetResponse } from '../models/dto/tweet';
 import { Tweet } from '../models/entity/tweet';
-import { TweetsRepository } from '../repositories/tweets';
+import TweetsRepository from '../repositories/tweets';
 
 class TweetsService {
   _tweetsRepository: TweetsRepository;

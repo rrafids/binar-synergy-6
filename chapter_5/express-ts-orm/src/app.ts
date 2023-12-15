@@ -9,7 +9,7 @@ import { swaggerConfig } from './utils/swaggerOption';
 import dotenv from 'dotenv';
 import cors from 'cors';
 import TweetsHandler from './handlers/tweets';
-import { TweetsRepository } from './repositories/tweets';
+import TweetsRepository from './repositories/tweets';
 import TweetsService from './services/tweets';
 
 dotenv.config();
@@ -101,3 +101,5 @@ app.post('/api/tweets', AuthMiddleware.authenticate, tweetsHandler.createTweet);
 app.listen(process.env.APP_PORT, () => {
   console.log(`Server is running on http://localhost:${process.env.APP_PORT}`);
 });
+
+export default app;

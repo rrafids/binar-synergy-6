@@ -1,6 +1,8 @@
 import { TweetEntity, Tweet } from '../models/entity/tweet';
 
 class TweetsRepository {
+  constructor() {}
+
   async getTweets(): Promise<Tweet[]> {
     const listTweet = await TweetEntity.query().withGraphFetched('user');
 
@@ -29,4 +31,4 @@ class TweetsRepository {
   }
 }
 
-export { TweetsRepository };
+export default TweetsRepository;

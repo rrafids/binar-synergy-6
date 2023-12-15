@@ -25,6 +25,10 @@ class AuthService {
         throw new Error("user doesn't exist");
       }
 
+      console.log('payloadddd', req.password);
+      console.log('payloadddd', user.password);
+
+
       // Check if password is correct
       const isPasswordCorrect = bcrypt.compareSync(
         req.password,
