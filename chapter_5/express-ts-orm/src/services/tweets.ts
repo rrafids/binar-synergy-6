@@ -3,8 +3,14 @@ import { Tweet } from '../models/entity/tweet';
 import { TweetsRepository } from '../repositories/tweets';
 
 class TweetsService {
-  static async getTweets(): Promise<TweetResponse[]> {
-    const listTweet = await TweetsRepository.getTweets();
+  _tweetsRepository: TweetsRepository;
+
+  constructor(tweetsRepository: TweetsRepository) {
+    this._tweetsRepository = tweetsRepository;
+  }
+
+  async getTweets(): Promise<TweetResponse[]> {
+    const listTweet = await this._tweetsRepository.getTweets();
 
     const listTweetResponse: TweetResponse[] = listTweet.map((tweet) => {
       const tweetResponse: TweetResponse = {
@@ -24,19 +30,47 @@ class TweetsService {
     return listTweetResponse;
   }
 
-  static async createTweet(tweet: TweetRequest): Promise<Tweet> {
-    try {
-      const tweetToCreate: Tweet = {
+  async getTweetByID(id: number): Promise<TweetResponse> {
+    const tweet = await this._tweetsRepository.getTweetByID(id);
+
+    let tweetResponse: TweetResponse = {
+      id: 0,
+      content: '',
+      user: {
+        id: 0,
+        name: '',
+        email: '',
+        profile_picture_file: '',
+      },
+    };
+
+    if (tweet !== null) {
+      tweetResponse = {
+        id: tweet.id as number,
         content: tweet.content,
-        user_id: tweet.user_id,
+        user: {
+          id: tweet.user?.id as number,
+          name: tweet.user?.name as string,
+          email: tweet.user?.email as string,
+          profile_picture_file: tweet.user?.profile_picture_url as string,
+        },
       };
-
-      const createdTweet = await TweetsRepository.createTweet(tweetToCreate);
-
-      return createdTweet;
-    } catch (error) {
-      throw error;
     }
+
+    return tweetResponse;
+  }
+
+  async createTweet(tweet: TweetRequest): Promise<Tweet> {
+    const tweetToCreate: Tweet = {
+      content: tweet.content,
+      user_id: tweet.user_id,
+    };
+
+    const createdTweet = await this._tweetsRepository.createTweet(
+      tweetToCreate
+    );
+
+    return createdTweet;
   }
 }
 

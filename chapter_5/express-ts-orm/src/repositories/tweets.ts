@@ -1,19 +1,27 @@
-import { Tweet, TweetEntity } from '../models/entity/tweet';
+import { TweetEntity, Tweet } from '../models/entity/tweet';
 
 class TweetsRepository {
-  static async getTweets(): Promise<Tweet[]> {
+  async getTweets(): Promise<Tweet[]> {
     const listTweet = await TweetEntity.query().withGraphFetched('user');
 
     return listTweet;
   }
 
-  static async createTweet(tweet: Tweet): Promise<Tweet> {
+  async createTweet(tweet: Tweet): Promise<Tweet> {
     const createdTweet = await TweetEntity.query().insert({
       content: tweet.content,
       user_id: tweet.user_id,
     });
 
     return createdTweet;
+  }
+
+  async getTweetByID(id: number): Promise<Tweet | null> {
+    const tweet = await TweetEntity.query()
+      .findById(id)
+      .withGraphFetched('user');
+
+    return tweet || null;
   }
 }
 

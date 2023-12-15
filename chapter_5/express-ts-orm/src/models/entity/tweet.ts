@@ -1,6 +1,15 @@
-import { Model, ModelObject } from 'objection';
+import { Model } from 'objection';
 import knexInstance from '../../../config/postgresql';
 import { User, UserEntity } from './user';
+import { Pojo } from 'objection';
+
+interface TweetModel extends Pojo {
+  id?: number;
+  content: string;
+  user_id: number;
+  created_at?: string;
+  user?: User;
+}
 
 export class TweetEntity extends Model {
   id?: number;
@@ -29,4 +38,4 @@ export class TweetEntity extends Model {
 
 Model.knex(knexInstance);
 
-export type Tweet = ModelObject<TweetEntity>;
+export type Tweet = TweetModel;

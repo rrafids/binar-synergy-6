@@ -20,7 +20,7 @@ export default function Header() {
   };
 
   return (
-    <div className='flex justify-between'>
+    <div className="flex justify-between">
       <h1 className='font-bold text-3xl'>Home</h1>
       {token.token !== '' ? (
         <button

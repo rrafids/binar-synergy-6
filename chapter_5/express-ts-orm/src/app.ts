@@ -9,6 +9,9 @@ import { swaggerConfig } from './utils/swaggerOption';
 import dotenv from 'dotenv';
 import cors from 'cors';
 import TweetsHandler from './handlers/tweets';
+import { TweetsRepository } from './repositories/tweets';
+import TweetsService from './services/tweets';
+
 dotenv.config();
 
 const app: Application = express();
@@ -16,10 +19,16 @@ const app: Application = express();
 app.use(express.json());
 app.use(cors());
 
+// Init repo
+const tweetsRepository = new TweetsRepository();
+
+// Init services
+const tweetsService = new TweetsService(tweetsRepository);
+
 // Init handlers
 const usersHandler = new UsersHandler();
 const authHandler = new AuthHandler();
-const tweetsHandler = new TweetsHandler();
+const tweetsHandler = new TweetsHandler(tweetsService);
 
 // Swagger
 const swaggerSpec = swaggerJsdoc(swaggerConfig);

@@ -5,8 +5,14 @@ import TweetsService from '../services/tweets';
 import { TweetRequest, TweetResponse } from '../models/dto/tweet';
 
 class TweetsHandler {
+  _tweetsService: TweetsService;
+
+  constructor(tweetsService: TweetsService) {
+    this._tweetsService = tweetsService;
+  }
+
   async getTweets(req: Request, res: Response) {
-    const tweetList: TweetResponse[] = await TweetsService.getTweets();
+    const tweetList: TweetResponse[] = await this._tweetsService.getTweets();
 
     const response: DefaultResponse = {
       status: 'OK',
@@ -20,7 +26,7 @@ class TweetsHandler {
   }
 
   async createTweet(req: Request, res: Response) {
-    let payload: TweetRequest = req.body;
+    const payload: TweetRequest = req.body;
 
     // Payload validation
     if (!payload.content) {
@@ -37,7 +43,7 @@ class TweetsHandler {
 
     payload.user_id = req.user.id as number;
 
-    const createdTweet: Tweet = await TweetsService.createTweet(payload);
+    const createdTweet: Tweet = await this._tweetsService.createTweet(payload);
 
     const response: DefaultResponse = {
       status: 'CREATED',
