@@ -28,7 +28,10 @@ const tweetsService = new TweetsService(tweetsRepository);
 // Init handlers
 const usersHandler = new UsersHandler();
 const authHandler = new AuthHandler();
+
 const tweetsHandler = new TweetsHandler(tweetsService);
+
+console.log(tweetsHandler._tweetsService);
 
 // Swagger
 const swaggerSpec = swaggerJsdoc(swaggerConfig);
