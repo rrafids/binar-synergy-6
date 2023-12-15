@@ -8,7 +8,7 @@ describe('GET /tweets', () => {
       .set('Content-type', 'application/json')
       .then(async (res) => {
         expect(res.statusCode).toBe(200);
-        expect(res.body.data.tweets).toBeInstanceOf([]);
+        expect(res.body.data.tweets).toBeInstanceOf(Array);
       });
   });
 });

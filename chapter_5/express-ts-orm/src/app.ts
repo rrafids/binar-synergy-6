@@ -31,8 +31,6 @@ const authHandler = new AuthHandler();
 
 const tweetsHandler = new TweetsHandler(tweetsService);
 
-console.log(tweetsHandler._tweetsService);
-
 // Swagger
 const swaggerSpec = swaggerJsdoc(swaggerConfig);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
