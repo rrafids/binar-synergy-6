@@ -9,6 +9,10 @@ class TweetsHandler {
 
   constructor(tweetsService: TweetsService) {
     this._tweetsService = tweetsService;
+
+    // Bind methods, so they can access the properties
+    this.getTweets = this.getTweets.bind(this);
+    this.createTweet = this.createTweet.bind(this);
   }
 
   async getTweets(req: Request, res: Response) {
