@@ -1,9 +1,9 @@
 {
   "name": "express-ts",
   "version": "1.0.0",
-  "main": "./src/app.ts",
+  "main": "./server.ts",
   "scripts": {
-    "dev": "ts-node-dev ./src/app.ts",
+    "dev": "ts-node-dev ./server.ts",
     "lint": "eslint ./src --ext .ts",
     "migrate:up": "knex migrate:up",
     "migrate:rollback": "knex migrate:rollback",

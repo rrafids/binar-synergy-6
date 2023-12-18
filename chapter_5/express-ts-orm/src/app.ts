@@ -99,8 +99,4 @@ app.post('/api/tweets', AuthMiddleware.authenticate, tweetsHandler.createTweet);
 // id, role ('admin' | 'user'), name, email, password, profile_picture_url
 // 3. Please add middleware for endpoint get list user for checking user role (please makesure he is an 'admin')
 
-app.listen(process.env.APP_PORT, () => {
-  console.log(`Server is running on http://localhost:${process.env.APP_PORT}`);
-});
-
 export default app;
